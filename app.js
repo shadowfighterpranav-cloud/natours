@@ -29,11 +29,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ["'self'"],
+      defaultSrc: ["'self'", 'https://*.stripe.com'],
       scriptSrc: [
         "'self'",
         'https://unpkg.com',
         'https://cdnjs.cloudflare.com',
+        'https://*.stripe.com', // 👈 Required for Stripe JS
       ],
       styleSrc: [
         "'self'",
@@ -41,15 +42,23 @@ app.use(
         'https://unpkg.com',
         'https://fonts.googleapis.com',
       ],
-      imgSrc: ["'self'", 'data:', 'https://*.tile.openstreetmap.org'],
+      imgSrc: [
+        "'self'",
+        'data:',
+        'blob:',
+        'https://*.tile.openstreetmap.org',
+        'https://*.stripe.com',
+      ],
       fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+      frameSrc: ["'self'", 'https://*.stripe.com'], // 👈 Required for Stripe Checkout frames
       connectSrc: [
         "'self'",
         'http://127.0.0.1:3000',
-        'ws://127.0.0.1:1234', // 👈 Added Parcel HMR WebSocket
+        'ws://127.0.0.1:*', // 👈 Wildcard covers any local Parcel HMR port
         'https://*.tile.openstreetmap.org',
         'https://unpkg.com',
         'https://cdnjs.cloudflare.com',
+        'https://*.stripe.com', // 👈 Required for client-side Stripe requests
       ],
     },
   }),

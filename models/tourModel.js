@@ -168,9 +168,9 @@ tourSchema.pre(/^find/, function () {
     select: '-__v -passwordChangedAt',
   });
 });
-tourSchema.post(/^find/, function (docs) {
-  console.log(`Query took ${Date.now() - this.start} milliseconds!`);
-});
+// tourSchema.post(/^find/, function (docs) {
+//   console.log(`Query took ${Date.now() - this.start} milliseconds!`);
+// });
 
 //Aggregation Middleware
 // tourSchema.pre('aggregate', function () {

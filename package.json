@@ -25,6 +25,7 @@
     "buffer": "^6.0.3",
     "compression": "^1.8.2",
     "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
     "crypto-browserify": "^3.12.1",
     "dotenv": "^17.4.2",
     "events": "^3.3.0",
